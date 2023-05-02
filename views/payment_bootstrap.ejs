@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- 自訂樣式 -->
+    <link href="./css/payment.css" rel="stylesheet">
+    <!-- bootstrap樣式 -->
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <!-- bootstrap JS -->
+    <script  src="/js/bootstrap.js"></script>
+    <script  src="/js/bootstrap.min.js"></script>
+    <!-- 自訂JS -->
+    <script defer src="/js/payment.js"></script>
+    <!-- jquery -->
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
+    <!-- bootstrap-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <title>付款</title>
+
+
+
+</head>
+
+<body>
+    <!--header-->
+    <%-partial('header')%>
+
+
+    <!-- 付款資訊 -->
+
+<div class="d-flex justify-content-center align-items-center flex-column top_text">
+    付款資訊
+</div>    
+<!-- 被選購的商品卡片 -->
+<!-- 商品卡片1 -->
+<div class="container">
+    <div class="card col-12  justify-content-center mx-auto d-flex flex-row"
+        style="width: 100%; height: 250px; border-radius: 34px;">
+        <div class="d-flex flex-column justify-content-center align-items-center col-2 ">
+            <img src="./media/product/鳳梨酥.jpg" class="store_photo" alt="微熱山丘鳳梨酥">
+            <div class=" mb-5 d-flex flex-column">
+                <p class="mt-auto fs-5"><%-data.country %></p>
+                <p class="mt-auto fs-5"><%-data.shop_name %><%-data.product %></p>
+            </div>
+        </div>
+        <div class="container row col-9">
+            <table class="table">
+                <thead>
+                    <tr class="border-black font_size_title">
+                        <th scope="col" class="text-center">開團者</th>
+                        <th scope="col" class="text-center">單價</th>
+                        <th scope="col" class="text-center">件數</th>
+                        <th scope="col" class="text-center">運費</th>
+                        <th scope="col" class="text-center">共計</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class=" border-black font_size">
+                        <th scope="col" class="text-center justify-content-center p-1">
+                            <img class="mt-4" src="./media/member/大頭貼.png" alt="大頭貼">
+                            <p class="mt-5"> <%- data2.user_name %> </p>
+                        </th>
+                        <th scope="col" class="text-center align-middle p-1"><%-data.product_price %>NT.</th>
+                        <th scope="col" class="text-center align-middle p-1" ><input style="width: 80px;"type="number" id="count"></th>
+                        <th scope="col" class="text-center align-middle p-1">0NT.</th>
+                        <th scope="col" class="text-center align-middle p-1">59NT.</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<!-- 取貨者姓名 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center "
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">取貨者姓名</p>
+        <input type="text" class="ms-4 mt-1">
+    </div>
+</div>
+<!-- 預計到貨時間 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">預計到貨日</p>
+        <p class="ms-4 mt-4 font_size " style="color: red;"><%-data.trade_date %></p>
+        <p class="ms-5 mt-4 font_size_title">商品賞味期限</p>
+        <p class="ms-4 mt-4 font_size " style="color: red;"><%-data.exp_date %></p>
+    </div>
+</div>
+<!-- 發票選擇 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">發票選擇</p>
+        <select name="bill" id="bill_choice" class="ms-4 mt-1 font_size">
+            <option value="paper_bill">紙本發票</option>
+            <option value="donate_bill">捐贈發票</option>
+            <option value="cloud_bill">電子發票</option>
+
+
+        </select>
+    </div>
+</div>
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center d-none" id="cloud_bill_no"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #FFBF55;">
+        <p class="ms-4 mt-4 font_size_title">電子發票號碼</p>
+        <input type="text" class="ms-4 mt-1">
+    </div>
+</div>
+<!-- 折扣碼序號 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center "
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">折扣碼序號</p>
+        <input type="text" class="ms-4 mt-1">
+    </div>
+</div>
+<!-- 付款方式 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">付款方式</p>
+        <select name="bill" id="payment" class="ms-4 mt-1 font_size">
+            <option value="none" selected disabled hidden>請選擇選項</option>
+            <option value="cash">貨到付款</option>
+            <option value="ATM">ATM轉帳</option>
+            <option value="credit_card">信用卡/金融卡</option>
+        </select>
+    </div>
+</div>
+<!-- 付款方式:選擇後 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center d-none"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #FFBF55; " id="cash">
+        <p class="ms-4 mt-4 font_size_title">貨到付款</p>
+        <p class="ms-4 mt-4 font_size">現金</p>
+    </div>
+    <div class="card  col-12   mx-auto d-flex flex-row  align-items-center d-none"
+        style="width: 100%; height: 320px; border-radius: 0px; background-color: #FFBF55;" id="c_card">
+        <p class="ms-4 mt-4 font_size_title">金融卡/信用卡</p>
+        <!-- div新增信用卡 -->
+        <div class="card mb-5 ms-4 justify-content-center " style="width: 450px;height: 150px;" id="increment_c_card">
+            <button class="ms-4 mt-3 hover_me btn btn-warning"
+                style="text-decoration: none; font-size: 18px; width: 140px; " id="increment">新增信用卡+</button>
+
+        </div>
+        <!-- div填信用卡號碼 -->
+        <div class="card mb-5 ms-4 justify-content-center d-none" style="width: 550px;height: 300px;"
+            id="increment_form">
+            <form class="row g-3 ms-4 me-4    justify-content-center align-items-center">
+                <div class="col-md-6">
+                    <label for="validationServer01" class="form-label">信用卡號碼
+                    </label>
+                    <input type="text" class="form-control " id="validationServer01" required pattern="[0-9]{15,17}">
+                    <div class="invalid-feedback">
+                        信用卡卡號介於15~17個數字
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationServer02" class="form-label">到期日</label>
+                    <input type="text" class="form-control " id="validationServer02" required
+                        pattern="^0[1-9]|1[0-2]\/[0-9][0-9]$">
+                    <div class="invalid-feedback">
+                        格式為月份/年分末兩碼
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationServerUsername" class="form-label">安全碼</label>
+                    <div class="input-group has-validation">
+
+                        <input type="text" class="form-control " id="validationServer03" required pattern="^\d{3}$">
+                        <div class="invalid-feedback">
+                            安全碼為3位數字
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationServer03" class="form-label">帳單寄送地址</label>
+                    <input type="text" class="form-control " id="validationServer04"
+                        aria-describedby="validationServer03Feedback" required>
+
+                </div>
+
+                <div class="col-md-3">
+                    <label for="validationServer05" class="form-label">郵遞區號</label>
+                    <input type="text" class="form-control " id="validationServer05"
+                        aria-describedby="validationServer05Feedback" required pattern="^\d{3,6}$">
+                    <div class="invalid-feedback">
+                        郵遞區號為3~6位數字
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationServer05" class="form-label">持卡人姓名</label>
+                    <input type="text" class="form-control " id="validationServer06"
+                        aria-describedby="validationServer05Feedback" required>
+
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-warning" type="button" id="c_card_form_go">確定送出</button>
+                </div>
+            </form>
+        </div>
+        <!-- 完成添加信用卡 -->
+        <div class="card mb-5 ms-4  d-none  " style="width: 450px;height: 150px; flex-direction: row;">
+            <i class="bi bi-pip ms-4 mt-2 " style="font-size:50px"></i>
+            <p class="ms-4 " style="margin-top: 30px;font-size: 18px;">中國信託</p>
+            <p class="ms-4 " style="margin-top: 30px;font-size: 18px;">**** 1234</p>
+            <button class="btn btn-warning align-items-center"
+                style="width: 150px;height: 40px; margin-top: 90px;margin-right: 10px;" id="add_card">添加新信用卡</button>
+
+        </div>
+    </div>
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center d-none"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #FFBF55;" id="ATM">
+        <p class="ms-4 mt-4 font_size_title">ATM轉帳</p>
+        <p class="ms-4 mt-4 font_size">請自行匯款後通知賣家</p>
+    </div>
+</div>
+<!-- 團購截止時間 -->
+<div class="container">
+    <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">團購截止時間</p>
+        <p class="ms-4 mt-4 font_size"><%-data.end_date %></p>
+    </div>
+</div>
+<!-- 寄送方式 -->
+<div class="container ">
+    <div class="card col-12  mx-auto d-flex flex-row   align-items-center "
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">寄送方式</p>
+        <button class="btn btn-warning ms-4 hover_me2 fs-5" name="sent" id="face_to_face">面交</button>
+
+        <button class="btn btn-warning ms-4 hover_me2 fs-5" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" name="sent"
+            id="mail">郵寄
+        </button>
+        <div class="collapse flex-column " id="collapseExample">
+            <div class="card card-body " style="width: 250px;height: 100px;">
+                <p> 郵寄地址:</p><input type="text" class=" mb-4 ">
+            </div>
+        </div>
+        <button class="btn btn-warning ms-4 hover_me2 fs-5" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" name="sent"
+            id="mail">超商取貨
+        </button>
+        <div class="collapse flex-column " id="collapseExample2">
+            <div class="card card-body " style="width: 250px;height: 100px;">
+                <p> 超商名稱:</p><input type="text" class=" mb-4 ">
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+<!-- 寄送按鈕 -->
+<div class="container d-flex justify-content-end  ">
+    <input type="submit" class="btn  fs-3 mt-5 justify-content-center " style="width: 250px; 
+        background-color:#D9D9D9; 
+        border: rgba(0, 86, 85, 1) 1px solid;
+        color:rgba(0, 86, 85, 1) ; " id="sure_button" value="確定結帳">
+        </input>
+</div>
+<%-partial('footer')%>
+<script>
+
+    
+</script>
+</body>
+</html>
