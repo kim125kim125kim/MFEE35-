@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 自訂樣式 -->
+    <link href="./css/payment.css" rel="stylesheet">
+    <!-- header樣式 -->
+    <link href="./css/header.css" rel="stylesheet">
+    <!-- footer樣式 -->
+    <link href="./css/footer.css" rel="stylesheet">
+    <!-- bootstrap樣式 -->
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <!-- bootstrap JS -->
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- 自訂JS -->
+    <script defer src="./js/payment.js"></script>
+    <!-- jquery -->
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
+    <!-- bootstrap-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- axios表單內容 -->
+
+
+    <title>DailyBuy 帶你買 | 跟團&付款流程</title>
+
+
+
+</head>
+
+<body>
+
+
+
+    <!--上方的header-->
+    <header class="nav">
+        <a href="#" class="header_logo ">
+            <img src="/media/logo/大專logo_帶你買.png" alt="logo">
+        </a>
+        <div class="header_text ">
+            <div class="items"><a href="#">最新消息</a></div>
+            <div class="items"><a href="#">精選團購</a></div>
+            <div class="items"><a href="#">全部團購</a></div>
+            <div class="items"><a href="#">許願清單</a></div>
+        </div>
+        <a href="#" class="member_icon bi bi-person-circle"></a>
+    </header>
+
+    <!--右方的header-->
+    <aside>
+        <div class="seach_icon">
+            <a href="#" class="icon bi bi-search"></a>
+            <a href="#" class="icon bi bi-facebook"></a>
+            <a href="#" class="icon bi bi-instagram"></a>
+            <a href="#" class="icon bi bi-heart-fill"></a>
+        </div>
+        <div class="search_modal">
+            <input type="text" class="bi bi-search search_modal_input" id="search-input">
+            <button class="icon bi bi-search search_icon" id="search-button"></button>
+        </div>
+        <div class="search_modal_background"></div>
+        <script>
+            let seach_bar = document.querySelector(".search_modal");
+            let modalBackground = document.querySelector(".search_modal_background");
+            const searchButton = document.getElementById('search-button');
+            document.addEventListener("click", function (r) {
+                if (r.target == document.querySelector(".bi-search")) {
+                    seach_bar.style.display = "flex";
+                    seach_bar.classList.add("show");
+                    modalBackground.classList.add("show");
+                } else if (r.target != seach_bar && !seach_bar.contains(r.target)) {
+                    seach_bar.style.display = "none";
+                    modalBackground.classList.remove("show");
+                    document.querySelector(".search_modal_input").value = "";
+                }
+            });
+            document.querySelector(".search_icon").onclick = () => {
+                let seach_content = document.querySelector(".search_modal_input");
+                sessionStorage.setItem("seach_content", seach_content.value);
+                console.log(sessionStorage.getItem("seach_content"));
+            }
+            searchButton.addEventListener('click', () => {
+                const keyword = document.getElementById('search-input').value;
+                window.location.href = '/allProducts';
+            });
+            window.onload = () => {
+                axios
+                    .get("http://localhost:3000/userlogin")
+                    .then(function (response) {
+                        var res = response;
+                        document.querySelector(".member_icon").onclick = () => {
+                            window.location = "/member";
+                        }
+                    })
+
+            }
+
+        </script>
+        <div class="about_us">
+
+            <div class="block"><a href="#">關於我們</a></div>
+            <div class="block"><a href="#"> 聯絡我們</a></div>
+            <div class="block"><a href="#"> 使用教學</a></div>
+        </div>
+    </aside>
+
+
+    <!-- 被選購的商品卡片 -->
+
+    <!-- 付款資訊 -->
+
+    <div class="d-flex justify-content-center align-items-center flex-column top_text">
+        付款資訊
+    </div>
+    <!-- 商品卡片1 -->
+    <div class="container" id="my_store_card">
+        <!-- <div class="card col-12  justify-content-center mx-auto d-flex flex-row"
+        style="width: 100%; height: 250px; border-radius: 34px;">
+        <div class="d-flex flex-column justify-content-center align-items-center col-2 ">
+            <img src="./media/product/鳳梨酥.jpg" class="store_photo" alt="微熱山丘鳳梨酥">
+            <div class=" mb-5 d-flex flex-column">
+                <p class="mt-auto fs-5">彰化</p>
+                <p class="mt-auto fs-5">微熱山丘鳳梨酥</p>
+            </div>
+        </div>
+        <div class="container row col-9">
+            <table class="table">
+                <thead>
+                    <tr class="border-black font_size_title">
+                        <th scope="col" class="text-center">開團者</th>
+                        <th scope="col" class="text-center">單價</th>
+                        <th scope="col" class="text-center">件數</th>
+                        <th scope="col" class="text-center">運費</th>
+                        <th scope="col" class="text-center">共計</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class=" border-black font_size">
+                        <th scope="col" class="text-center justify-content-center p-1">
+                            <img class="mt-4" src="./media/member/大頭貼.png" alt="大頭貼">
+                            <p class="mt-5">黃花花</p>
+                        </th>
+                        <th scope="col" class="text-center align-middle p-1">59NT.</th>
+                        <th scope="col" class="text-center align-middle p-1"><input style="width: 80px;" type="number"
+                                id="count"></th>
+                        <th scope="col" class="text-center align-middle p-1">0NT.</th>
+                        <th scope="col" class="text-center align-middle p-1">59NT.</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div> -->
+        <script src="./js/store_card.js"></script>
+    </div>
+    <!-- 預計到貨時間 -->
+    <div class="container" id="trade_date">
+        <!-- <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">預計到貨日</p>
+        <p class="ms-4 mt-4 font_size " style="color: red;">2023/5/31</p>
+        <p class="ms-5 mt-4 font_size_title">商品賞味期限</p>
+        <p class="ms-4 mt-4 font_size " style="color: red;">2023/5/31</p>
+    </div> -->
+        <script src="./js/trade_date.js"></script>
+    </div>
+    <!-- 團購截止時間 -->
+    <div class="container" id="end_date">
+        <!-- <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+        style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+        <p class="ms-4 mt-4 font_size_title">團購截止時間</p>
+        <p class="ms-4 mt-4 font_size">2023/5/31</p>
+    </div> -->
+        <script src="./js/end_date.js"></script>
+    </div>
+
+
+    <div class="container">
+        <form id="my_form" action="/order_data2" method="post">
+            <!-- 取貨者姓名 -->
+            <div class="card col-12   mx-auto d-flex flex-row  align-items-center  "
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+                <label class="ms-4 mt-2 font_size_title d-block" for="name">取貨者姓名</label>
+                <input type="text" class="ms-4 mt-1" id="name" name="user_name">
+
+                <label class="ms-4 mt-2 font_size_title d-block" for="bill_choice">發票選擇</label>
+                <select id="bill_choice" class="ms-4 mt-1 font_size">
+                    <option value="none" selected disabled hidden>請選擇選項</option>
+                    <option value="paper_bill">紙本發票</option>
+                    <option value="donate_bill">捐贈發票</option>
+                    <option value="cloud_bill">電子發票</option>
+
+
+                </select>
+
+            </div>
+            <!-- 發票選擇 -->
+
+            <div class="card col-12   mx-auto d-flex flex-row  align-items-center d-none" id="cloud_bill_no"
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #FFBF55;">
+                <p class="ms-4 mt-4 font_size_title">電子發票號碼</p>
+                <input type="text" class="ms-4 mt-1">
+            </div>
+            <div class="card col-12   mx-auto d-flex flex-row  align-items-center "
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+                <label class="ms-4 mt-2 font_size_title" for="discount">折扣碼序號</label>
+                <input type="text" class="ms-4 mt-1" id="discount">
+            </div>
+
+            <div class="card col-12   mx-auto d-flex flex-row  align-items-center"
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+                <label class="ms-4 mt-2 font_size_title" for="payment">付款方式</label>
+                <select name="pay_way" id="payment" class="ms-4 mt-1 font_size">
+                    <option value="none" selected disabled hidden>請選擇選項</option>
+                    <option value="現金">貨到付款</option>
+                    <option value="ATM繳款">ATM轉帳</option>
+                    <option value="線上刷卡">信用卡/金融卡</option>
+                </select>
+            </div>
+            <div class="card col-12   mx-auto d-flex flex-row  align-items-center d-none"
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #FFBF55; " id="cash">
+                <p class="ms-4 mt-4 font_size_title">貨到付款</p>
+                <p class="ms-4 mt-4 font_size">現金</p>
+            </div>
+            <div class="card  col-12   mx-auto d-flex flex-row  align-items-center d-none"
+                style="width: 100%; height: 320px; border-radius: 0px; background-color: #FFBF55;" id="c_card">
+                <p class="ms-4 mt-4 font_size_title">金融卡/信用卡</p>
+                <!-- div新增信用卡 -->
+                <!-- <div class="card mb-5 ms-4 justify-content-center " style="width: 450px;height: 150px;"
+                    id="increment_c_card">
+                    <button class="ms-4 mt-3 hover_me btn btn-warning"
+                        style="text-decoration: none; font-size: 18px; width: 140px; " id="increment">新增信用卡+</button>
+
+                </div> -->
+                <!-- div填信用卡號碼 -->
+                <div class="card mb-5 ms-4 justify-content-center " style="width: 550px;height: 300px;"
+                    id="increment_form">
+
+                    <div class="row g-3 ms-4 me-4    justify-content-center align-items-center">
+                        <div class="col-md-6">
+                            <label for="validationServer01" class="form-label">信用卡號碼
+                            </label>
+                            <input type="text" name="credit_card" class="form-control " id="validationServer01" required
+                                pattern="[0-9]{15,17}" name="credit_card">
+                            <div class="invalid-feedback">
+                                信用卡卡號介於15~17個數字
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationServer02" class="form-label">到期日</label>
+                            <input type="text" class="form-control " id="validationServer02" required
+                                pattern="^0[1-9]|1[0-2]\/[0-9][0-9]$" name="month">
+                            <div class="invalid-feedback">
+                                格式為月份/年分末兩碼
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationServerUsername" class="form-label">安全碼</label>
+                            <div class="input-group has-validation">
+
+                                <input type="text" class="form-control " id="validationServer03" required
+                                    pattern="^\d{3}$">
+                                <div class="invalid-feedback">
+                                    安全碼為3位數字
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationServer03" class="form-label">帳單寄送地址</label>
+                            <input type="text" class="form-control " id="validationServer04"
+                                aria-describedby="validationServer03Feedback" required>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="validationServer05" class="form-label">郵遞區號</label>
+                            <input type="text" class="form-control " id="validationServer05"
+                                aria-describedby="validationServer05Feedback" required pattern="^\d{3,6}$">
+                            <div class="invalid-feedback">
+                                郵遞區號為3~6位數字
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationServer05" class="form-label">持卡人姓名</label>
+                            <input type="text" class="form-control " id="validationServer06"
+                                aria-describedby="validationServer05Feedback" required>
+
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-warning" type="button" id="c_card_form_go">確定送出</button>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 完成添加信用卡 -->
+                <div class="card mb-5 ms-4  d-none  " style="width: 450px;height: 150px; flex-direction: row;"
+                    id="c_card_ok">
+                    <i class="bi bi-pip ms-4 mt-2 " style="font-size:50px"></i>
+                    <p class="ms-4 " style="margin-top: 30px;font-size: 18px;">中國信託</p>
+                    <p class="ms-4 " style="margin-top: 30px;font-size: 18px;">**** 1234</p>
+                    <button class="btn btn-warning align-items-center"
+                        style="width: 150px;height: 40px; margin-top: 90px;margin-right: 10px;"
+                        id="add_card">添加新信用卡</button>
+
+                </div>
+            </div>
+            <div class="card col-12   mx-auto d-flex flex-row  align-items-center d-none"
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #FFBF55;" id="ATM">
+                <p class="ms-4 mt-4 font_size_title">ATM轉帳</p>
+                <p class="ms-4 mt-4 font_size">請自行匯款後通知賣家</p>
+            </div>
+            <div class="card col-12  mx-auto d-flex flex-row   align-items-center "
+                style="width: 100%; height: 70px; border-radius: 0px; background-color: #F3D7A8;">
+                <label for="shipping" class="ms-4 mt-2 font_size_title">寄送方式</label>
+                <select id="shipping" name="shipping" class="ms-4 mt-1 font_size">
+                    <option value="none" selected disabled hidden>請選擇選項</option>
+                    <option value="面交">面交</option>
+                    <option value="宅配">宅配</option>
+
+                </select>
+
+                <div class="ms-5">
+                    <label for="address">地址/寄送店家:</label>
+                    <input type="text" name="address" id="address">
+                </div>
+
+
+            </div>
+            <div class="container d-flex justify-content-end  ">
+                <button type="submit" class="btn  fs-3 mt-5 justify-content-center " style="width: 250px; 
+                background-color:#D9D9D9; 
+                border: rgba(0, 86, 85, 1) 1px solid;
+                color:rgba(0, 86, 85, 1) ; " id="sure_button">
+                    確定送出 </button>
+
+            </div>
+        </form>
+    </div>
+
+
+    <!-- 發票選擇 -->
+
+    <!-- 折扣碼序號 -->
+    <div class="container">
+
+    </div>
+    <!-- 付款方式 -->
+    <div class="container">
+
+    </div>
+    <!-- 付款方式:選擇後 -->
+    <div class="container">
+
+    </div>
+
+    <!-- 寄送方式 -->
+    <div class="container ">
+
+    </div>
+
+    <!-- 寄送按鈕 -->
+
+
+    <!-- 表單的送出 -->
+    <script>
+        $('#sure_button').on('click', function (event) {
+            // 整理表單資料
+            event.preventDefault();
+            var data = $("#my_form").serializeArray();
+            JSONdata = serializeToJSON(data)
+            console.log(JSONdata);
+            //ajax請求
+            $.ajax({
+                url: "/order_data2",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSONdata,
+                success: function (res) {
+                    var res = JSON.parse(res)
+                    console.log(res.errno);
+                    if (res.errno == 1) {
+                        console.log("新增成功")
+
+
+                    } else if (res.errno == 0) {
+                        console.log("新增失敗")
+                    }
+                },
+                error: function () {
+                    alert("系統錯誤")
+                    console.log(res.errno)  
+                    window.location.href = 'success.html';
+                }
+            })
+           
+
+            // const name = document.querySelector('#name').value;
+            // const bill_choice = document.querySelector('#bill_choice').value;
+            // const discount = document.querySelector('#discount').value;
+            // const payment = document.querySelector('#payment').value;
+            // const address = document.querySelector('#address').value;
+            // const shipping = document.querySelector('#shipping').value;
+
+            // if (!name || !discount||!bill_choice||!payment||!address||!shipping) {
+            //     event.preventDefault();
+            //     alert('還有格子沒填到喔!');
+            // }else{
+            //    
+            // }
+
+        })
+
+
+
+        function serializeToJSON(data) {
+            var values = {};
+            for (index in data) {
+                values[data[index].name] = data[index].value;
+            }
+            return JSON.stringify(values);
+        }
+    </script>
+
+</body>
+<footer class="footer_pd">
+    <ul>
+        <li id="footer_main"><a href="">最新消息</a></li>
+    </ul>
+    <ul>
+        <li id="footer_main"><a href="#">全部團購</a></li>
+        <li id="footer_sub"><a href="#">北部團購</a></li>
+        <li id="footer_sub"><a href="#">中部團購</a></li>
+        <li id="footer_sub"><a href="#">南部團購</a></li>
+        <li id="footer_sub"><a href="#">東部團購</a></li>
+        <li id="footer_sub"><a href="#">外島團購</a></li>
+    </ul>
+    <ul>
+        <li id="footer_main"><a href="#">精選團購</a></li>
+        <li id="footer_sub"><a href="#">北部團購</a></li>
+        <li id="footer_sub"><a href="#">中部團購</a></li>
+        <li id="footer_sub"><a href="#">南部團購</a></li>
+        <li id="footer_sub"><a href="#">東部團購</a></li>
+        <li id="footer_sub"><a href="#">外島團購</a></li>
+    </ul>
+    <ul>
+        <li id="footer_main"><a href="#">會員中心</a></li>
+        <li id="footer_sub"><a href="#">註冊</a></li>
+        <li id="footer_sub"><a href="#">登入</a></li>
+    </ul>
+    <ul>
+        <li id="footer_main"><a href="#">關於我們</a></li>
+    </ul>
+    <ul>
+        <li id="footer_main"><a href="#">聯絡我們</a></li>
+    </ul>
+    <ul>
+        <li id="footer_main"><a href="#">使用教學</a></li>
+    </ul>
+</footer>
+
+</html>

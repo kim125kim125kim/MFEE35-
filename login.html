@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>時機buy buy | 會員登入</title>
+
+
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- title icon -->
+  <link href="media/大專logo 2.png" rel="icon" type="image/png">
+  <!-- bootstrap icon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <!-- 字體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;700&family=Lobster&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/login.css">
+
+  <!-- axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- google_login -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+    integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- facebook-login -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+    integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- facebook-login -->
+</head>
+
+<body>
+  <!--上方的header-->
+  <header class="nav">
+    <a href="#" class="header_logo ">
+      <img src="media/logo/大專logo_帶你買.png" alt="logo">
+    </a>
+    <div class="header_text ">
+      <div id="items"><a href="#">最新消息</a></div>
+      <div id="items"><a href="#">精選團購</a></div>
+      <div id="items"><a href="#">全部團購</a></div>
+      <div id="items"><a href="#">許願清單</a></div>
+    </div>
+    <a href="#" class="member_icon bi bi-person-circle"></a>
+  </header>
+
+  <!--右方的header-->
+  <aside>
+    <div class="seach_icon">
+      <a href="#" class="icon bi bi-search"></a>
+      <a href="#" class="icon bi bi-facebook"></a>
+      <a href="#" class="icon bi bi-instagram"></a>
+      <a href="#" class="icon bi bi-heart-fill"></a>
+    </div>
+
+    <div class="about_us">
+
+      <div class="block"><a href="#">關於我們</a></div>
+      <div class="block"><a href="#"> 聯絡我們</a></div>
+      <div class="block"><a href="#"> 使用教學</a></div>
+
+    </div>
+  </aside>
+
+
+
+  <!-- log in -->
+  <div class="log_in_div" style="margin-top: 100px;">
+    <!-- LOGN IN FORM by Omar Dsoky -->
+    <form class="log_in_form">
+      <!--   con = Container  for items in the form-->
+      <div class="con">
+        <!--     Start  header Content  -->
+        <div class="head-form">
+          <h2>會員登入</h2>
+        </div>
+        <!--     End  header Content  -->
+        <div class="field-set">
+          <!--   user name -->
+          <span class="input-item">
+            <i class="bi bi-person"></i>
+          </span>
+          <!--   user name Input-->
+          <input class="form-input" id="log_in_accoount" placeholder="請輸入電子信箱" name="account" required>
+
+          <br>
+
+          <!--   Password -->
+
+          <span class="input-item">
+            <i class="bi bi-key"></i>
+          </span>
+          <!--   Password Input-->
+          <input class="form-input" type="password" placeholder="請輸入密碼" id="log_in_pwd" name="password" required>
+
+          <!--      Show/hide password  -->
+          <span>
+            <i class="bi bi-eye-slash" aria-hidden="true" type="button" id="eye"></i>
+          </span>
+
+
+          <br>
+          <!--      button LogIn -->
+          <button class="btn_login" type="button"> 登入 </button>
+          <a class="a_text" href="./resetPWD">忘記密碼...</a>
+
+        </div>
+
+        <!--   其他方式登入 other buttons -->
+        <div class="other">
+          <hr>
+          <!--      Facebook log_in button-->
+          <button type="button" id="facebook_login">
+            <fb:login-button id="facebook_i" scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+          </button>
+          <button class="btn facebook" type="button">
+            <span><i class="bi bi-facebook"></i></span>
+            Facebook登入
+          </button>
+          <!--     Google log_in button -->
+          <!-- // 2023/05/05 google登入----------------- -->
+
+          <div class="google_btn_r">
+            <div id="g_id_onload"
+              data-client_id="820544868766-bffes38ud319rqfl1tcvdp6t0deiqqng.apps.googleusercontent.com"
+              data-context="signin" data-ux_mode="popup" data-callback="onSignIn1" data-auto_prompt="false"></div>
+
+            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black"
+              data-text="signin_with" data-size="large" data-logo_alignment="center" data-width="60"></div>
+          </div>
+
+          <!-- // 2023/05/05 google登入----------------- -->
+          <button class="btn google" type="button">
+            <span><i class="bi bi-google"></i></span>
+            Google登入</button>
+          <!--      End Other the Division -->
+        </div>
+        <!-- 我還沒註冊超連結 -->
+        <br>
+        <div>
+          <a class="a_text" href="./register">我還沒註冊...</a>
+        </div>
+
+        <!--   End Conrainer  -->
+      </div>
+
+      <!-- End Form -->
+    </form>
+
+  </div>
+
+  <!-- footer -->
+  <footer class="footer_pd">
+    <ul>
+      <li id="footer_main"><a href="">最新消息</a></li>
+    </ul>
+    <ul>
+      <li id="footer_main"><a href="#">全部團購</a></li>
+      <li id="footer_sub"><a href="#">北部團購</a></li>
+      <li id="footer_sub"><a href="#">中部團購</a></li>
+      <li id="footer_sub"><a href="#">南部團購</a></li>
+      <li id="footer_sub"><a href="#">東部團購</a></li>
+      <li id="footer_sub"><a href="#">外島團購</a></li>
+    </ul>
+    <ul>
+      <li id="footer_main"><a href="#">精選團購</a></li>
+      <li id="footer_sub"><a href="#">北部團購</a></li>
+      <li id="footer_sub"><a href="#">中部團購</a></li>
+      <li id="footer_sub"><a href="#">南部團購</a></li>
+      <li id="footer_sub"><a href="#">東部團購</a></li>
+      <li id="footer_sub"><a href="#">外島團購</a></li>
+    </ul>
+    <ul>
+      <li id="footer_main"><a href="#">會員中心</a></li>
+      <li id="footer_sub"><a href="./register">註冊</a></li>
+      <li id="footer_sub"><a href="./login">登入</a></li>
+      <li id="footer_sub"><a href="#" onclick="logout()">登出</a></li>
+    </ul>
+    <ul>
+      <li id="footer_main"><a href="#">關於我們</a></li>
+    </ul>
+    <ul>
+      <li id="footer_main"><a href="#">聯絡我們</a></li>
+    </ul>
+    <ul>
+      <li id="footer_main"><a href="#">使用教學</a></li>
+    </ul>
+  </footer>
+
+
+  <!-- jQuery -->
+  <script src="js/jquery-3.6.0.js"></script>
+  <!-- JS -->
+  <script src="js/login.js"></script>
+  <!-- 動畫JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="icon" href="/media/logo/大專logo(only).png">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/font-family/GenSenRounded-M.ttc">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <script src="/js/product_javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+    <title>DailyBuy 帶你買</title>
+</header>
+
+<body>
+     <!--上方的header-->
+    <header class="nav">
+        <a href="#" class="header_logo ">
+            <img src="./media/logo/大專logo_帶你買.png" alt="logo">
+        </a>
+        <div class="header_text ">
+            <div class="items"><a href="#">最新消息</a></div>
+            <div class="items"><a href="#">精選團購</a></div>
+            <div class="items"><a href="#">全部團購</a></div>
+            <div class="items"><a href="#">許願清單</a></div>
+        </div>
+        <a href="#" class="member_icon bi bi-person-circle"></a>
+    </header>
+
+    <!--右方的header-->
+    <aside>
+        <div class="seach_icon">
+            <a href="#" class="icon bi bi-search"></a>
+            <a href="#" class="icon bi bi-facebook"></a>
+            <a href="#" class="icon bi bi-instagram"></a>
+            <a href="#" class="icon bi bi-heart-fill"></a>
+        </div>
+        <div class="search_modal">
+            <input type="text" class="bi bi-search search_modal_input">
+            <button class="icon bi bi-search search_icon"></button>
+        </div>
+        <!-- <script>
+            document.querySelector(".bi-search").onclick = (r) => {
+                document.querySelector(".search_modal").style.display = "flex";
+            }
+            window.onload = () => {
+                axios
+                    .get("http://localhost:3000/userlogin")
+                    .then(function (response) {
+                        var res = response;
+                        document.querySelector(".member_icon").onclick = () => {
+                            console.log(res);
+                        }
+                    })
+            }
+
+        </script> -->
+        <div class="about_us">
+            <div class="block"><a href="#">關於我們</a></div>
+            <div class="block"><a href="#"> 聯絡我們</a></div>
+            <div class="block"><a href="#"> 使用教學</a></div>
+        </div>
+    </aside>
+
+    <!-- 商品介紹的上方內容 -->
+    <div class="pd_container">
+        <div class="product_pic_container">
+            <div class="product_pic">
+                <div class="item">
+                    <img id="item1" src="">
+                    <img id="item2" src="">
+                    <img id="item3" src="">
+                </div>
+                <div class="item_big">
+                    <img id="item_pic" src="">
+                </div>
+            </div>
+        </div>
+
+        <div class="product_introduce_container">
+            <form class="product_intro_box">
+                <p class="intro_text_title">微熱山丘土鳳梨酥</p>
+                <p class="intro_text">限時特價活動至5/31</p>
+                <p class="intro_text">付款方式:
+                    <br>線上刷卡、刷卡分期、ATM繳款、無卡分期、行動支付
+                </p>
+                <p class="intro_text">配送方式:
+                    <br>宅配、定點自取、面交
+                </p>
+                <br>
+                <div class="product_select">
+                    <select class="product_count">
+                        <option id="spec1" data-price="50">單顆入</option>
+                        <option id="spec2" data-price="300">一盒入(6個入)</option>
+                        <option id="spec3" data-price="600">禮盒</option>
+                    </select>
+                </div>
+                <br>
+                <p class="intro_text">金額</p>
+                <p class="product_sum">50元</p>
+
+
+                <div class="pd_btn" action="./statement.html">
+                    <button class="btn_join" onmouseenter="change(this)" onmouseleave="backto(this)"
+                        type="submit"><a href="payment_V2.html">我要跟團</a></button>
+                    <div class="pd_btn_collect">
+                        <button class="btn_create " onmouseenter="chang2(this)"
+                            onmouseleave="backto2(this)">我要新開團</button>
+                        <i class="bi bi-heart collect_list" onclick="toggleHeart()"></i>
+                    </div>
+                </div>
+                <script>
+                    function change() {
+                        document.querySelector(".btn_join").style.backgroundColor =
+                            "rgb(59, 166, 1)";
+                        document.querySelector(".btn_join").style.color =
+                            "rgb(245, 245, 245)";
+                    }
+                    function backto() {
+                        document.querySelector(".btn_join").style.border =
+                            "2px solid rgb(59, 166, 1)";
+                        document.querySelector(".btn_join").style.backgroundColor =
+                            "rgb(245, 245, 245)";
+                        document.querySelector(".btn_join").style.color = "rgb(59, 166, 1)";
+                    }
+                    function chang2() {
+                        document.querySelector(".btn_create").style.backgroundColor =
+                            "rgb(206, 112, 64)";
+                        document.querySelector(".btn_create").style.color =
+                            "rgb(245, 245, 245)";
+                    }
+                    function backto2() {
+                        document.querySelector(".btn_create").style.border =
+                            "2px solid rgb(206, 112, 64)";
+                        document.querySelector(".btn_create").style.backgroundColor =
+                            "rgb(245, 245, 245)";
+                        document.querySelector(".btn_create").style.color =
+                            "rgb(206, 112, 64)";
+                    }
+                    function toggleHeart(icon, uid, pid) {
+                        console.log(icon.classList.contains("bi-heart-fill"));
+                        console.log(icon.classList.contains("bi-heart"));
+                        if (icon.classList.contains("bi-heart")) {
+                            axios
+                                .post("http://localhost:3000/add-to-favorites", {
+                                    pid: pid,
+                                    uid: uid
+                                })
+                                .then(() => {
+                                    console.log("更新成功");
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                            icon.classList.remove("bi-heart");
+                            icon.classList.add("bi-heart-fill");
+
+                        } else if (!icon.classList.contains("bi-heart")) {
+                            axios
+                                .delete("http://localhost:3000/remove-to-favorites", {
+                                    data: {
+                                        pid: pid,
+                                        uid: uid
+                                    },
+                                })
+                                .then(() => {
+                                    console.log("刪除成功");
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                            icon.classList.remove("bi-heart-fill");
+                            icon.classList.add("bi-heart");
+                        }
+                    }
+          
+
+
+                </script>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <div>
+        <div class="product_about">
+            <ul class="product_about_ul">
+                <li class="info_sells">商品介紹</li>
+                <li class="info_contact">聯絡資訊</li>
+                <li class="info_change">退換貨須知</li>
+            </ul>
+
+            <div class="sells_info">
+                <img src="" class="sells_info_bg">
+                <div class="sells_info_content">
+                    烈日下熟成的鳳梨，以濃縮陽光滋味的鳳梨醬為基底，
+                    佐酸甜合宜的季節調味，搭配健康飼養的鮮力蛋，
+                    天然奶油和精選麵粉，揉成有稜有角的微熱山丘鳳梨酥。
+                </div>
+            </div>
+            <div class="pd_contact_info">
+                有什麼問題想問團主嗎？在此留言！
+                <textarea id="host_contact_input" name="message"></textarea>
+                <input type="submit" value="送出" id="host_contact_submit">
+            </div>
+
+            <div class="change_info">
+                七日鑑賞期是根據消費者保護法規定，客戶（含本人、親友或管理員等），在簽收商品後隔日起算七日，在商品(非客製化商品)保持全新狀能且完整包裝的情況下，可無條件退回商品。<br>
+                顏色的部份因電腦設定關係，實品顏色會比電腦上有較亮或較暗的情況同屬正常範圍，對顏色較敏感的買家，請確認可接受再作訂購。<br>
+                收到商品超過7天，恕不接受退貨。<br>
+                請於您想退貨的訂單中，留言提出您的退貨申請及退貨原因，收到您的退貨申請後，我們立即與您確認退貨相關事宜。<br>
+                退貨商品皆不可使用過，保持商品全新，吊牌未折，並請依原包裝寄回。退回商品需包含此筆訂單的所有商品（含贈品）及發票等，如未將此筆訂單包裹中的所有內容物妥善包裝、完整寄回，需請您自費郵資補件。<br>
+                如果訂單已享有滿額或滿件等優惠，將不接受部分退貨。<br>
+                已使用之優惠券於完成結帳後即不再有效，退貨申請成立後也無法取回優惠券，敬請見諒。<br>
+                當您提交退貨申請表後，即代表同意我們的退貨原則，並接受我們代為處理發票作廢及相關的後續處理事宜。
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <footer class="footer_pd">
+            <ul>
+                <li id="footer_main"><a href="">最新消息</a></li>
+            </ul>
+            <ul>
+                <li id="footer_main"><a href="#">全部團購</a></li>
+                <li id="footer_sub"><a href="#">北部團購</a></li>
+                <li id="footer_sub"><a href="#">中部團購</a></li>
+                <li id="footer_sub"><a href="#">南部團購</a></li>
+                <li id="footer_sub"><a href="#">東部團購</a></li>
+            </ul>
+            <ul>
+                <li id="footer_main"><a href="#">精選團購</a></li>
+                <li id="footer_sub"><a href="#">北部團購</a></li>
+                <li id="footer_sub"><a href="#">中部團購</a></li>
+                <li id="footer_sub"><a href="#">南部團購</a></li>
+                <li id="footer_sub"><a href="#">東部團購</a></li>
+            </ul>
+            <ul>
+                <li id="footer_main"><a href="#">會員中心</a></li>
+                <li id="footer_sub"><a href="#">註冊</a></li>
+                <li id="footer_sub"><a href="#">登入</a></li>
+            </ul>
+            <ul>
+                <li id="footer_main"><a href="#">關於我們</a></li>
+            </ul>
+            <ul>
+                <li id="footer_main"><a href="#">聯絡我們</a></li>
+            </ul>
+            <ul>
+                <li id="footer_main"><a href="#">使用教學</a></li>
+            </ul>
+        </footer>
+</body>
+
+</html>

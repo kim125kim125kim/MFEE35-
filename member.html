@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時機buy buy | 會員中心</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- title icon -->
+    <link href="media/大專logo 2.png" rel="icon" type="image/png">
+    <!-- bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/member.css">
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <!--上方的header-->
+    <header class="nav">
+        <a href="#" class="header_logo ">
+            <img src="media/logo/大專logo_帶你買.png" alt="logo">
+        </a>
+        <div class="header_text ">
+            <div id="items"><a href="#">最新消息</a></div>
+            <div id="items"><a href="#">精選團購</a></div>
+            <div id="items"><a href="#">全部團購</a></div>
+            <div id="items"><a href="#">許願清單</a></div>
+        </div>
+        <a href="#" class="member_icon bi bi-person-circle"></a>
+    </header>
+
+    <!--右方的header-->
+    <aside>
+        <div class="seach_icon">
+            <a href="#" class="icon bi bi-search"></a>
+            <a href="#" class="icon bi bi-facebook"></a>
+            <a href="#" class="icon bi bi-instagram"></a>
+            <a href="#" class="icon bi bi-heart-fill"></a>
+        </div>
+
+        <div class="about_us">
+
+            <div class="block"><a href="#">關於我們</a></div>
+            <div class="block"><a href="#"> 聯絡我們</a></div>
+            <div class="block"><a href="#"> 使用教學</a></div>
+        </div>
+    </aside>
+
+    <!-- main主體 -->
+    <main class="container">
+        <!-- 主要三分頁按鈕 -->
+        <div class="tab container">
+            <button class="tablinks openMember" onclick="openMember()" id="defaultOpen">基本資料</button>
+            <button class="tablinks openFollower" onclick="openFollower()">跟團者資訊</button>
+            <button class="tablinks openLeader" onclick="openLeader()">開團者資訊</button>
+        </div>
+
+        <!-- 基本資料分頁 -->
+        <div id="member_section" class="tabcontent container">
+            <div class="member_container">
+                <!-- 大頭貼 -->
+                <div class="member_head col-4">
+                    <img class="selfie m-3" src="media/member/img_avatar.png"
+                        style="border-radius: 50%; width: 200px; ">
+                    <h5 class="nick_name">暱稱:<span class="head_nick_name">小團長</span></h5>
+                    <button class="btn ">基本資料</button>
+                    <button class="btn" onclick="update_info()">變更資料</button>
+                </div>
+
+                <!-- 基本資料 -->
+                <div id="my_info" class="member_info col-8">
+                    <table class="my_info_table">
+                        <tr>
+                            <td><strong>帳號：</strong></td>
+                            <td>aabb123@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>本名：</strong></td>
+                            <td>王小團</td>
+                        </tr>
+                        <tr>
+                            <td><strong>暱稱：</strong></td>
+                            <td>小團長</td>
+                        </tr>
+                        <tr>
+                            <td><strong>生日：</strong></td>
+                            <td>2023/03/28</td>
+                        </tr>
+                        <tr>
+                            <td><strong>手機：</strong></td>
+                            <td>0912-888777</td>
+                        </tr>
+                        <tr>
+                            <td><strong>地址：</strong></td>
+                            <td>台中市富豪區有錢路100號</td>
+                        </tr>
+                        <tr>
+                            <td><strong>自介:</strong></td>
+                            <td style="font-size: 22px;">
+                                大家好，我是小團長。我是一個熱愛團購的人，喜歡組織大家一起購物，享受折扣的樂趣。在我眼裡，團購不僅是一種省錢的方式，更是一種建立群體凝聚力的機會。
+                                我喜歡挖掘各種優惠，尋找最划算的商品，讓大家都能夠買到好東西。我也非常注重品質和服務，希望每一位參與團購的人都能夠滿意。
+                                如果你也喜歡團購，歡迎加入我的團隊，讓我們一起享受團購的樂趣，並且一起成長。</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 彈出對話框修改資料 -->
+        <dialog id="update_info">
+            <form id="info_form" action="/upload/update_info" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="user_id">
+                <h3 class="dialog_title">
+                    <span name="email"></span>
+                    <button class="btn-close" style="font-size: 20px; margin-left: 500px;" onclick="close_update_info()"
+                        type="button"></button>
+                </h3>
+                <label class="update_selfie" for="selfie">
+                    <p style="margin-top: 70px; margin-left: 50px;">大頭照上傳</p>
+                </label>
+                <input class=" " type="file" name="selfie" id="selfie">
+                <br>
+                <label for="user_name">本名:</label>
+                <input id="user_name" class="update_input" type="text" name="user_name" value="" placeholder="本名">
+                <label for="nick_name">暱稱:</label>
+                <input id="nick_name" class="update_input" type="text" name="nick_name" value="" placeholder="暱稱">
+                <label for="password">變更密碼:</label>
+                <input id="password" class="update_input" type="password" name="password" value="" placeholder="請輸入新密碼">
+                <label for="birthday">生日:</label>
+                <input id="birthday" class="update_input" type="date" name="birthday" value="">
+                <label for="phone">手機:</label>
+                <input id="phone" class="update_input" type="tel" name="phone" value="" placeholder="09xx-xxxxxx"
+                    pattern="09[0-9]{2}-[0-9]{6}">
+                <label for="address">地址:</label>
+                <input id="address" class="update_input" type="text" name="address" value="" placeholder="地址">
+                <label for="user_intro">自介:</label>
+                <textarea id="user_intro" class="update_textarea" name="user_intro" cols="30" rows="10">
+                </textarea>
+                <input class="savebtn" type="submit" onclick="submit__update_info()" value="儲存修改">
+            </form>
+        </dialog>
+
+
+
+        <!-- 開團者分頁 -->
+        <div id="leader_section" class="tabcontent container">
+            <div class="leader_container">
+                <!-- 大頭貼 -->
+                <div class="leader_head col-4">
+                    <img class="selfie m-3" src="media/member/img_avatar.png" style="border-radius: 50%; width: 200px;">
+                    <h5 class="nick_name">暱稱:<span class="head_nick_name">小團長</span></h5>
+                    <button class="btn">開團商品</button>
+                </div>
+
+                <!-- 開團中 -->
+                <div class="leader_group col-8">
+                    <!-- 開團商品card -->
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 彈出對話框開團訂單 -->
+        <div id="leader_order" class="container leader_order_modal leader_modal_background">
+            <button class="btn-close" style="font-size: 20px; margin-left: 1220px;" type="button"
+                onclick="close_leader_order()"></button>
+            <div class="container align-items-center">
+                <div class="container row d-flex justify-content-center"
+                    style="margin-left: 5px; background-color: #D9D9D9; border-radius: 34px;">
+                    <!-- 表格 -->
+                    <div class="d-flex flex-column col-12 justify-content-center">
+                        <table class="table order_table">
+                            <thead>
+                                <tr class="border-black font_size_title">
+                                    <th scope="col" class="text-center" >跟團者</th>
+                                    <th scope="col" class="text-center" >規格</th>
+                                    <th scope="col" class="text-center" >面交地/寄送地</th>
+                                    <th scope="col" class="text-center" >件數</th>
+                                    <th scope="col" class="text-center" >共計</th>
+                                    <th scope="col" class="text-center" >付款方式</th>
+                                    <th scope="col" class="text-center" >寄送方式</th>
+                                    <th scope="col" class="text-center" >是否出貨</th>
+                                </tr>
+                            </thead>
+                            <tbody class="leader_order_tbody">
+
+                                <tr class="border-black font_size">
+                                    <td scope="col" class="text-center align-middle p-1">王小團</td>
+                                    <td scope="col" class="text-center align-middle p-1">鹽之花焦糖胡桃塔（6吋）</td>
+                                    <td scope="col" class="text-center align-middle p-1">花蓮縣花蓮市自由街13號</td>
+                                    <td scope="col" class="text-center align-middle p-1">1個</td>
+                                    <td scope="col" class="text-center align-middle p-1">59NT.</td>
+                                    <td scope="col" class="text-center align-middle p-1">線上刷卡</td>
+                                    <td scope="col" class="text-center align-middle p-1">宅配</td>
+                                    <td scope="col" class="text-center align-middle p-1">
+                                        <input scope="col" class="text-center align-middle p-1" type="checkbox">
+                                    </td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <!-- 詳細資訊 -->
+                <div class="container mt-3 align-items-center order-info">
+                   
+                    <button id="update_state_btn" class="btn btn-warning" style="width: 100%">已出貨</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 跟團者分頁 -->
+        <div id="follower_section" class="tabcontent container">
+            <div class="follower_container">
+                <!-- 大頭貼 -->
+                <div class="follower_head col-4">
+                    <img class="selfie m-3" src="media/member/img_avatar.png" style="border-radius: 50%; width: 200px;">
+                    <h5 class="nick_name">暱稱:<span class="head_nick_name">小團長</span></h5>
+                    <button class="btn">跟團商品</button>
+
+                </div>
+
+                <!-- 跟團中 -->
+                <div class="follower_group col-8">
+                    <!-- 跟團商品card -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 彈出對話框跟團訂單 -->
+        <div id="follower_order" class="container follower_order_modal follower_modal_background">
+            
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer_pd">
+        <ul>
+            <li id="footer_main"><a href="">最新消息</a></li>
+        </ul>
+        <ul>
+            <li id="footer_main"><a href="#">全部團購</a></li>
+            <li id="footer_sub"><a href="#">北部團購</a></li>
+            <li id="footer_sub"><a href="#">中部團購</a></li>
+            <li id="footer_sub"><a href="#">南部團購</a></li>
+            <li id="footer_sub"><a href="#">東部團購</a></li>
+            <li id="footer_sub"><a href="#">外島團購</a></li>
+        </ul>
+        <ul>
+            <li id="footer_main"><a href="#">精選團購</a></li>
+            <li id="footer_sub"><a href="#">北部團購</a></li>
+            <li id="footer_sub"><a href="#">中部團購</a></li>
+            <li id="footer_sub"><a href="#">南部團購</a></li>
+            <li id="footer_sub"><a href="#">東部團購</a></li>
+            <li id="footer_sub"><a href="#">外島團購</a></li>
+        </ul>
+        <ul>
+            <li id="footer_main"><a href="#">會員中心</a></li>
+            <li id="footer_sub"><a href="#">註冊</a></li>
+            <li id="footer_sub"><a href="#">登入</a></li>
+            <li id="footer_sub"><a href="#" id="logout" type="button">登出</a></li>
+        </ul>
+        <ul>
+            <li id="footer_main"><a href="#">關於我們</a></li>
+        </ul>
+        <ul>
+            <li id="footer_main"><a href="#">聯絡我們</a></li>
+        </ul>
+        <ul>
+            <li id="footer_main"><a href="#">使用教學</a></li>
+        </ul>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.6.0.js"></script>
+    <!-- 會員切換頁面-->
+    <script src="js/member.js"> </script>
+    <script src="js/logout.js"></script>
+    <!-- 動畫JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+</body>
+
+</html>
