@@ -17,6 +17,6 @@
 6-3跟團者可以自己提出願望清單。
 6-4願望清單的細節，提供會員提出許願清單：品名or店名、所在地、備註：XXX;
 
-其中我所負責的是跟團表單和結帳表單的部分，
-網頁的技術點為HTML、CSS、Bootstrap、JavaScript、jquery、node.js以及mysql
+其中我所負責的是跟團+結帳表單的部分，以及網站的搜尋功能，
+網頁的技術點為HTML、CSS、Bootstrap、JavaScript、jquery、axios、ajax以及node.js以及mysql
 
